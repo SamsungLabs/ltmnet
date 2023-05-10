@@ -84,7 +84,7 @@ Ground truth:
 
 Train / Valid / Test split
 ```
-python3 -m prepare.gen_file_lists \
+python3 -m prepare.gen_file_lists_mit_adobe \
     --out_dir "~/Data" \
     --train_range 101 1100 \
     --val_range 1 100 \
@@ -95,7 +95,15 @@ python3 -m prepare.gen_file_lists \
 - Test indices: a4502 - a5000
 
 ### Training
-Coming soon ...
+8 x 8 grid
+```
+python3 -m jobs.ltmnet_mit_grid8x8
+```
+
+1 x 1 grid
+```
+python3 -m jobs.ltmnet_mit_grid1x1
+```
 
 ## Pretrained Models
 LTMNet trained on HDR+ dataset: [pretrained_models/ltmnet_hdrplus_ds_model](pretrained_models/ltmnet_hdrplus_ds_model)

@@ -20,7 +20,7 @@ import pickle
 from metrics import PSNRMean, SSIMMean
 from losses import ltm_loss
 import utils
-from models.tone_curve_net import ToneCurveNetConv
+from models.tone_curve_net import ToneCurveNetConv, ToneCurveNetConvGrid1x1
 from models.residual_net import LTMNetResConv
 import os
 os.environ['TFHUB_MODEL_LOAD_FORMAT'] = 'COMPRESSED'
@@ -62,6 +62,8 @@ def get_model(args):
         model = ToneCurveNetConv(**model_args)
     elif args.model_architecture == 'res_conv':
         model = LTMNetResConv(**model_args)
+    elif args.model_architecture == 'conv_grid1x1':
+        model = ToneCurveNetConvGrid1x1(**model_args)
     else:
         raise Exception('Model architecture not supported.')
     return model

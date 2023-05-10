@@ -53,3 +53,20 @@ class ToneCurveNetConv(LTMBaseModel):
 
         tone_curves = tf.reshape(x, [tf.shape(x)[0], self.num_tiles, self.curves, self.control_points])
         return tone_curves
+
+
+class ToneCurveNetConvGrid1x1(ToneCurveNetConv):
+    def __init__(self, grid_size, control_points, input_size, curves, l1_weight=1.0, pix_weight=None,
+                 vgg_weight=1e-5, vgg=None):
+        super(ToneCurveNetConvGrid1x1, self).__init__(grid_size=grid_size,
+                                                      control_points=control_points,
+                                                      input_size=input_size,
+                                                      curves=curves,
+                                                      l1_weight=l1_weight,
+                                                      pix_weight=pix_weight,
+                                                      vgg_weight=vgg_weight,
+                                                      vgg=vgg)
+
+        model_layers = get_layers((8, 8), control_points, curves)
+        model_layers.append(layers.GlobalAvgPool2D())
+        self.model_layers = model_layers
